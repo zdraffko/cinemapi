@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetAvailableSeatsCount\GetAvailableSeatsCountHandler.cs" />
     <Compile Include="NewProjection\NewProjectionMovieValidation.cs" />
     <Compile Include="NewProjection\NewProjectionRoomValidation.cs" />
     <Compile Include="NewProjection\NewProjectionCreation.cs" />
@@ -66,5 +67,6 @@
       <Name>CinemAPI.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

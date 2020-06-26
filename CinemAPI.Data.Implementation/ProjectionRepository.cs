@@ -16,6 +16,11 @@ namespace CinemAPI.Data.Implementation
             this.db = db;
         }
 
+        public IProjection GetProjectionById(int projectionId)
+        {
+            return db.Projections.FirstOrDefault(p => p.Id == projectionId);
+        }
+
         public IProjection Get(int movieId, int roomId, DateTime startDate)
         {
             return db.Projections.FirstOrDefault(x => x.MovieId == movieId &&
