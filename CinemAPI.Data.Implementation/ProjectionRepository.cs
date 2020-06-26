@@ -33,7 +33,7 @@ namespace CinemAPI.Data.Implementation
 
         public void Insert(IProjectionCreation proj)
         {
-            Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate);
+            Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate, proj.AvailableSeatsCount);
 
             db.Projections.Add(newProj);
             db.SaveChanges();

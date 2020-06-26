@@ -18,7 +18,11 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public IHttpActionResult Index(ProjectionCreationModel model)
         {
-            NewProjectionSummary summary = newProj.New(new Projection(model.MovieId, model.RoomId, model.StartDate));
+            NewProjectionSummary summary = newProj.New(new Projection(
+                model.MovieId,
+                model.RoomId,
+                model.StartDate,
+                model.AvailableSeatsCount));
 
             if (summary.IsCreated)
             {

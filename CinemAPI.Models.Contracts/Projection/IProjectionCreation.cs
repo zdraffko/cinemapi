@@ -9,5 +9,7 @@ namespace CinemAPI.Models.Contracts.Projection
         int MovieId { get; }
 
         DateTime StartDate { get; }
+
+        int AvailableSeatsCount { get; }
     }
 }

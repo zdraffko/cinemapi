@@ -50,6 +50,14 @@
   <ItemGroup>
     <Compile Include="CinemaDbContext.cs" />
     <Compile Include="MigrationConfiguration.cs" />
+    <Compile Include="Migrations\202006260654223_InitialMigration.cs" />
+    <Compile Include="Migrations\202006260654223_InitialMigration.Designer.cs">
+      <DependentUpon>202006260654223_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006261138501_AddAvailableSeatsCountColumnToProjections.cs" />
+    <Compile Include="Migrations\202006261138501_AddAvailableSeatsCountColumnToProjections.Designer.cs">
+      <DependentUpon>202006261138501_AddAvailableSeatsCountColumnToProjections.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="IModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
@@ -66,6 +74,14 @@
       <Project>{BA334908-BED7-43D3-B885-A8B529EC6D36}</Project>
       <Name>CinemAPI.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006260654223_InitialMigration.resx">
+      <DependentUpon>202006260654223_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006261138501_AddAvailableSeatsCountColumnToProjections.resx">
+      <DependentUpon>202006261138501_AddAvailableSeatsCountColumnToProjections.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,7 +17,16 @@ namespace CinemAPI.Domain
 
         public NewProjectionSummary New(IProjectionCreation projection)
         {
-            projectionsRepo.Insert(new Projection(projection.MovieId, projection.RoomId, projection.StartDate));
+            if (projection.AvailableSeatsCount < 0)
+            {
+                return new NewProjectionSummary(false, "The projection can not have less than 0 available seats.");
+            }
+
+            projectionsRepo.Insert(new Projection(
+                projection.MovieId,
+                projection.RoomId,
+                projection.StartDate,
+                projection.AvailableSeatsCount));
 
             return new NewProjectionSummary(true);
         }
