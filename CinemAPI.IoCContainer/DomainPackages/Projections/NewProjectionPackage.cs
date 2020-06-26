@@ -1,13 +1,11 @@
-﻿using CinemAPI.Domain;
-using CinemAPI.Domain.Contracts;
-using CinemAPI.Domain.GetAvailableSeatsCount;
-using CinemAPI.Domain.NewProjection;
+﻿using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Projections.NewProjection;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
-namespace CinemAPI.IoCContainer
+namespace CinemAPI.IoCContainer.DomainPackages.Projections
 {
-    public class DomainPackage : IPackage
+    public class NewProjectionPackage : IPackage
     {
         public void RegisterServices(Container container)
         {
@@ -17,8 +15,6 @@ namespace CinemAPI.IoCContainer
             container.RegisterDecorator<INewProjection, NewProjectionRoomValidation>();
             container.RegisterDecorator<INewProjection, NewProjectionPreviousOverlapValidation>();
             container.RegisterDecorator<INewProjection, NewProjectionNextOverlapValidation>();
-
-            container.Register<IGetAvailableSeatsCount, GetAvailableSeatsCountHandler>();
         }
     }
 }

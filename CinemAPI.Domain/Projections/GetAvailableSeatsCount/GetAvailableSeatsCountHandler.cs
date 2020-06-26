@@ -1,10 +1,10 @@
 ﻿using System;
 using CinemAPI.Data;
-using CinemAPI.Domain.Contracts;
-using CinemAPI.Domain.Contracts.Models;
+using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 using CinemAPI.Models.Contracts.Projection;
 
-namespace CinemAPI.Domain.GetAvailableSeatsCount
+namespace CinemAPI.Domain.Projections.GetAvailableSeatsCount
 {
     public class GetAvailableSeatsCountHandler : IGetAvailableSeatsCount
     {

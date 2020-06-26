@@ -1,6 +1,6 @@
-﻿using CinemAPI.Domain.Contracts.Models;
+﻿using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 
-namespace CinemAPI.Domain.Contracts
+namespace CinemAPI.Domain.Contracts.Contracts
 {
     public interface IGetAvailableSeatsCount
     {

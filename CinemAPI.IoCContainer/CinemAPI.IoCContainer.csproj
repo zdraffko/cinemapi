@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataPackage.cs" />
-    <Compile Include="DomainPackage.cs" />
+    <Compile Include="DomainPackages\Projections\GetAvailableSeatsCountPackage.cs" />
+    <Compile Include="DomainPackages\Projections\NewProjectionPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,5 +76,6 @@
       <Name>CinemAPI.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

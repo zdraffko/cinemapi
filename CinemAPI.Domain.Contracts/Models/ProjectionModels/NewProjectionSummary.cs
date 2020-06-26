@@ -1,4 +1,4 @@
-﻿namespace CinemAPI.Domain.Contracts.Models
+﻿namespace CinemAPI.Domain.Contracts.Models.ProjectionModels
 {
     public class NewProjectionSummary
     {

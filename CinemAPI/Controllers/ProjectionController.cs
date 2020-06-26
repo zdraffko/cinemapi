@@ -1,8 +1,8 @@
-﻿using CinemAPI.Domain.Contracts;
-using CinemAPI.Domain.Contracts.Models;
-using CinemAPI.Models;
+﻿using CinemAPI.Models;
 using CinemAPI.Models.Input.Projection;
 using System.Web.Http;
+using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 
 namespace CinemAPI.Controllers
 {

@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGetAvailableSeatsCount.cs" />
-    <Compile Include="INewProjection.cs" />
-    <Compile Include="Models\GetAvailableSeatsCountSummary.cs" />
-    <Compile Include="Models\NewProjectionSummary.cs" />
+    <Compile Include="Contracts\IGetAvailableSeatsCount.cs" />
+    <Compile Include="Contracts\INewProjection.cs" />
+    <Compile Include="Models\ProjectionModels\GetAvailableSeatsCountSummary.cs" />
+    <Compile Include="Models\ProjectionModels\NewProjectionSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,5 +52,6 @@
       <Name>CinemAPI.Models.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

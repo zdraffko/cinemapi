@@ -40,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetAvailableSeatsCount\GetAvailableSeatsCountHandler.cs" />
-    <Compile Include="NewProjection\NewProjectionMovieValidation.cs" />
-    <Compile Include="NewProjection\NewProjectionRoomValidation.cs" />
-    <Compile Include="NewProjection\NewProjectionCreation.cs" />
-    <Compile Include="NewProjection\NewProjectionNextOverlapValidation.cs" />
-    <Compile Include="NewProjection\NewProjectionPreviousOverlapValidation.cs" />
-    <Compile Include="NewProjection\NewProjectionUniqueValidation.cs" />
+    <Compile Include="Projections\GetAvailableSeatsCount\GetAvailableSeatsCountHandler.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionMovieValidation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionRoomValidation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionCreation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionNextOverlapValidation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionPreviousOverlapValidation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionUniqueValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

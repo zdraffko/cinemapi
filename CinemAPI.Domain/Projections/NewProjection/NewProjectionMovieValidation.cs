@@ -1,10 +1,10 @@
 ﻿using CinemAPI.Data;
-using CinemAPI.Domain.Contracts;
-using CinemAPI.Domain.Contracts.Models;
+using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 using CinemAPI.Models.Contracts.Movie;
 using CinemAPI.Models.Contracts.Projection;
 
-namespace CinemAPI.Domain.NewProjection
+namespace CinemAPI.Domain.Projections.NewProjection
 {
     public class NewProjectionMovieValidation : INewProjection
     {

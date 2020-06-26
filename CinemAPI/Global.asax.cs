@@ -1,4 +1,5 @@
-﻿using CinemAPI.IoCContainer;
+﻿using System.Reflection;
+using CinemAPI.IoCContainer;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.WebApi;
@@ -14,11 +15,7 @@ namespace CinemAPI
             Container container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
-            IPackage[] packages = new IPackage[]
-            {
-                new DataPackage(),
-                new DomainPackage()
-            };
+            IPackage[] packages = container.GetPackagesToRegister(new[] { Assembly.GetAssembly(typeof(DataPackage)) });
 
             foreach (IPackage package in packages)
             {
