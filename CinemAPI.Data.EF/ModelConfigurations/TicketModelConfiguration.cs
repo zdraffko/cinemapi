@@ -12,10 +12,7 @@ namespace CinemAPI.Data.EF.ModelConfigurations
 
             ticketModel.HasKey(model => model.Id);
 
-            ticketModel.Property(model => model.ProjectionStartDate).IsRequired();
-            ticketModel.Property(model => model.MovieName).IsRequired().HasMaxLength(200);
-            ticketModel.Property(model => model.CinemaName).IsRequired().HasMaxLength(200);
-            ticketModel.Property(model => model.RoomNumber).IsRequired();
+            ticketModel.Property(model => model.ProjectionId).IsRequired();
             ticketModel.Property(model => model.Row).IsRequired();
             ticketModel.Property(model => model.Column).IsRequired();
             ticketModel.Property(model => model.IsReserved).IsRequired();
@@ -23,10 +20,7 @@ namespace CinemAPI.Data.EF.ModelConfigurations
 
             ticketModel.HasIndex(model => new
             {
-                model.ProjectionStartDate,
-                model.MovieName,
-                model.CinemaName,
-                model.RoomNumber,
+                model.ProjectionId,
                 model.Row,
                 model.Column
             }).IsUnique();

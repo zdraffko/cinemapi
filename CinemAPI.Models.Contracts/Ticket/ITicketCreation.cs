@@ -1,16 +1,8 @@
-﻿using System;
-
-namespace CinemAPI.Models.Contracts.Ticket
+﻿namespace CinemAPI.Models.Contracts.Ticket
 {
     public interface ITicketCreation
     {
-        DateTime ProjectionStartDate { get; set; }
-
-        string MovieName { get; set; }
-
-        string CinemaName { get; set; }
-
-        int RoomNumber { get; set; }
+        long ProjectionId { get; set; }
 
         int Row { get; set; }
 

@@ -35,16 +35,8 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
 
         public ReserveSeatsSummary Handle(long projectionId, int row, int column)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
-            IMovie movie = moviesRepo.GetById(projection.MovieId);
-            IRoom room = roomsRepo.GetById(projection.RoomId);
-            ICinema cinema = cinemasRepo.GetById(room.CinemaId);
-
             ticketsRepo.Insert(new Ticket(
-                projection.StartDate,
-                movie.Name,
-                cinema.Name,
-                room.Number,
+                projectionId,
                 row,
                 column,
                 true,
@@ -53,12 +45,11 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
 
             projectionsRepo.DecreaseAvailableSeats(projectionId, 1);
 
-            ITicket newTicket = ticketsRepo.Get(projection.StartDate,
-                movie.Name,
-                cinema.Name,
-                room.Number,
-                row,
-                column);
+            ITicket newTicket = ticketsRepo.Get(projectionId, row, column);
+            IProjection projection = projectionsRepo.GetById(projectionId);
+            IMovie movie = moviesRepo.GetById(projection.MovieId);
+            IRoom room = roomsRepo.GetById(projection.RoomId);
+            ICinema cinema = cinemasRepo.GetById(room.CinemaId);
 
             return new ReserveSeatsSummary(new TicketDto
             {

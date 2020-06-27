@@ -13,42 +13,18 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
     {
         private readonly IReserveSeats reserveSeats;
         private readonly ITicketRepository ticketsRepo;
-        private readonly IProjectionRepository projectionsRepo;
-        private readonly IMovieRepository moviesRepo;
-        private readonly IRoomRepository roomsRepo;
-        private readonly ICinemaRepository cinemasRepo;
 
         public ReservedSeatsValidation(
             IReserveSeats reserveSeats,
-            ITicketRepository ticketsRepo,
-            IProjectionRepository projectionsRepo,
-            IMovieRepository moviesRepo,
-            IRoomRepository roomsRepo,
-            ICinemaRepository cinemasRepo)
+            ITicketRepository ticketsRepo)
         {
             this.reserveSeats = reserveSeats;
             this.ticketsRepo = ticketsRepo;
-            this.projectionsRepo = projectionsRepo;
-            this.moviesRepo = moviesRepo;
-            this.roomsRepo = roomsRepo;
-            this.cinemasRepo = cinemasRepo;
         }
 
         public ReserveSeatsSummary Handle(long projectionId, int row, int column)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
-            IMovie movie = moviesRepo.GetById(projection.MovieId);
-            IRoom room = roomsRepo.GetById(projection.RoomId);
-            ICinema cinema = cinemasRepo.GetById(room.CinemaId);
-
-            ITicket ticket = ticketsRepo.Get(
-                projection.StartDate,
-                movie.Name,
-                cinema.Name,
-                room.Number,
-                row,
-                column
-            );
+            ITicket ticket = ticketsRepo.Get(projectionId, row, column);
 
             if (ticket != null && ticket.IsReserved)
             {

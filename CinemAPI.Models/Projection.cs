@@ -1,5 +1,6 @@
 ﻿using CinemAPI.Models.Contracts.Projection;
 using System;
+using System.Collections.Generic;
 
 namespace CinemAPI.Models
 {
@@ -7,9 +8,11 @@ namespace CinemAPI.Models
     {
         public Projection()
         {
+            this.Tickets = new List<Ticket>();
         }
 
         public Projection(int movieId, int roomId, DateTime startDate, int availableSeatsCount)
+            : this()
         {
             this.MovieId = movieId;
             this.RoomId = roomId;
@@ -30,5 +33,7 @@ namespace CinemAPI.Models
         public DateTime StartDate { get; set; }
 
         public int AvailableSeatsCount { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

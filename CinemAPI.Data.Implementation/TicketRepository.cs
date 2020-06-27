@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CinemAPI.Data.EF;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Ticket;
@@ -20,13 +19,10 @@ namespace CinemAPI.Data.Implementation
             return db.Tickets.FirstOrDefault(t => t.Id == ticketId);
         }
 
-        public ITicket Get(DateTime projectionStartDate, string movieName, string cinemaName, int roomNumber, int row, int column)
+        public ITicket Get(long projectionId, int row, int column)
         {
             return db.Tickets.FirstOrDefault(t =>
-                t.ProjectionStartDate == projectionStartDate &&
-                t.MovieName == movieName &&
-                t.CinemaName == cinemaName &&
-                t.RoomNumber == roomNumber &&
+                t.ProjectionId == projectionId &&
                 t.Row == row &&
                 t.Column == column);
         }
@@ -34,10 +30,7 @@ namespace CinemAPI.Data.Implementation
         public void Insert(ITicketCreation ticket)
         {
             Ticket newTicket = new Ticket(
-                ticket.ProjectionStartDate,
-                ticket.MovieName,
-                ticket.CinemaName,
-                ticket.RoomNumber,
+                ticket.ProjectionId,
                 ticket.Row,
                 ticket.Column,
                 ticket.IsReserved,

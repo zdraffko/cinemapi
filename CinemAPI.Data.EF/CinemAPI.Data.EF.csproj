@@ -62,6 +62,10 @@
     <Compile Include="Migrations\202006270828267_AddTicketsTable.Designer.cs">
       <DependentUpon>202006270828267_AddTicketsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006271359036_AddRelationshipBetweenProjectionsAndTickets.cs" />
+    <Compile Include="Migrations\202006271359036_AddRelationshipBetweenProjectionsAndTickets.Designer.cs">
+      <DependentUpon>202006271359036_AddRelationshipBetweenProjectionsAndTickets.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="IModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006270828267_AddTicketsTable.resx">
       <DependentUpon>202006270828267_AddTicketsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006271359036_AddRelationshipBetweenProjectionsAndTickets.resx">
+      <DependentUpon>202006271359036_AddRelationshipBetweenProjectionsAndTickets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

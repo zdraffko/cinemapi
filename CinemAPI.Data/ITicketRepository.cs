@@ -1,5 +1,4 @@
-﻿using System;
-using CinemAPI.Models.Contracts.Ticket;
+﻿using CinemAPI.Models.Contracts.Ticket;
 
 namespace CinemAPI.Data
 {
@@ -7,13 +6,7 @@ namespace CinemAPI.Data
     {
         ITicket GetById(long ticketId);
 
-        ITicket Get(
-            DateTime projectionStartDate,
-            string movieName,
-            string cinemaName,
-            int roomNumber,
-            int row,
-            int column);
+        ITicket Get(long projectionId, int row, int column);
 
         void Insert(ITicketCreation ticket);
     }
