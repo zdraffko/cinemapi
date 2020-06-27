@@ -40,5 +40,38 @@ namespace CinemAPI.Data.Implementation
             db.Tickets.Add(newTicket);
             db.SaveChanges();
         }
+
+        public void CancelReservation(long ticketId)
+        {
+            Ticket ticket = db.Tickets.FirstOrDefault(t => t.Id == ticketId);
+
+            if (ticket == null)
+            {
+                return;
+            }
+
+            ticket.IsReserved = false;
+
+            db.SaveChanges();
+        }
+
+        public int CancelReservationsForProjection(long projectionId)
+        {
+            IQueryable<Ticket> tickets = db.Tickets.Where(t => t.ProjectionId == projectionId);
+
+            int canceledReservationsCount = 0;
+            foreach (Ticket ticket in tickets)
+            {
+                if (ticket.IsReserved && !ticket.IsBought)
+                {
+                    ticket.IsReserved = false;
+                    canceledReservationsCount += 1;
+                }
+            }
+
+            db.SaveChanges();
+
+            return canceledReservationsCount;
+        }
     }
 }

@@ -57,5 +57,19 @@ namespace CinemAPI.Data.Implementation
 
             db.SaveChanges();
         }
+
+        public void IncreaseAvailableSeats(long projectionId, int seatsCount)
+        {
+            Projection projection = db.Projections.FirstOrDefault(p => p.Id == projectionId);
+
+            if (projection == null)
+            {
+                return;
+            }
+
+            projection.AvailableSeatsCount += seatsCount;
+
+            db.SaveChanges();
+        }
     }
 }

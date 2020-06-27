@@ -9,5 +9,9 @@ namespace CinemAPI.Data
         ITicket Get(long projectionId, int row, int column);
 
         void Insert(ITicketCreation ticket);
+
+        void CancelReservation(long ticketId);
+
+        int CancelReservationsForProjection(long projectionId);
     }
 }

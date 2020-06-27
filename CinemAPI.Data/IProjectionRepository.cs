@@ -15,5 +15,7 @@ namespace CinemAPI.Data
         IEnumerable<IProjection> GetActiveProjections(int roomId);
 
         void DecreaseAvailableSeats(long projectionId, int seatsCount);
+
+        void IncreaseAvailableSeats(long projectionId, int seatsCount);
     }
 }
