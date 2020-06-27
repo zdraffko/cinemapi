@@ -14,6 +14,8 @@ namespace CinemAPI.Data
 
         void BuyWithoutReservation(long projectionId, int row, int column);
 
+        void BuyWithReservation(long ticketId);
+
         void CancelReservation(long ticketId);
 
         int CancelReservationsForProjection(long projectionId);

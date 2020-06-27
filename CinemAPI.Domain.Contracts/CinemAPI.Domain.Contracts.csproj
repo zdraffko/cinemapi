@@ -43,11 +43,13 @@
     <Compile Include="Contracts\ProjectionContracts\IGetAvailableSeatsCount.cs" />
     <Compile Include="Contracts\ProjectionContracts\INewProjection.cs" />
     <Compile Include="Contracts\TicketContracts\IBuyWithoutReservation.cs" />
+    <Compile Include="Contracts\TicketContracts\IBuyWithReservation.cs" />
     <Compile Include="Contracts\TicketContracts\IReserveSeats.cs" />
     <Compile Include="DTOs\TicketDto.cs" />
     <Compile Include="Models\ProjectionModels\GetAvailableSeatsCountSummary.cs" />
     <Compile Include="Models\ProjectionModels\NewProjectionSummary.cs" />
     <Compile Include="Models\TicketModels\BuyWithoutReservationSummary.cs" />
+    <Compile Include="Models\TicketModels\BuyWithReservationSummary.cs" />
     <Compile Include="Models\TicketModels\ReserveSeatsSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

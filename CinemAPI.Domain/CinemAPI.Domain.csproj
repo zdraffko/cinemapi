@@ -52,6 +52,8 @@
     <Compile Include="Tickets\BuyWithoutReservation\BuyWithoutReservationHandler.cs" />
     <Compile Include="Tickets\BuyWithoutReservation\ProjectionValidation.cs" />
     <Compile Include="Tickets\BuyWithoutReservation\SeatsValidation.cs" />
+    <Compile Include="Tickets\BuyWithReservation\BuyWithReservationHandler.cs" />
+    <Compile Include="Tickets\BuyWithReservation\ReservationValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ExistingSeatsValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ReservedSeatsValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ReserveSeatsHandler.cs" />

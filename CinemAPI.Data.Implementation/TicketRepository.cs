@@ -85,6 +85,20 @@ namespace CinemAPI.Data.Implementation
             db.SaveChanges();
         }
 
+        public void BuyWithReservation(long ticketId)
+        {
+            Ticket ticket = this.GetById(ticketId) as Ticket;
+
+            if (ticket == null)
+            {
+                return;
+            }
+
+            ticket.IsBought = true;
+
+            db.SaveChanges();
+        }
+
         public void CancelReservation(long ticketId)
         {
             Ticket ticket = this.GetById(ticketId) as Ticket;
