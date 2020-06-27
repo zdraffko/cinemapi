@@ -49,6 +49,7 @@
     <Compile Include="DataPackage.cs" />
     <Compile Include="DomainPackages\Projections\GetAvailableSeatsCountPackage.cs" />
     <Compile Include="DomainPackages\Projections\NewProjectionPackage.cs" />
+    <Compile Include="DomainPackages\Tickets\ReserveSeatsPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

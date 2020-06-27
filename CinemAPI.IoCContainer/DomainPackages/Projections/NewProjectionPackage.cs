@@ -1,4 +1,4 @@
-﻿using CinemAPI.Domain.Contracts.Contracts;
+﻿using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Projections.NewProjection;
 using SimpleInjector;
 using SimpleInjector.Packaging;

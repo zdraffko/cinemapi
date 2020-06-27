@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CinemAPI.Data;
-using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 using CinemAPI.Models.Contracts.Movie;
 using CinemAPI.Models.Contracts.Projection;

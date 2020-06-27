@@ -1,7 +1,7 @@
 ﻿using CinemAPI.Models;
 using CinemAPI.Models.Input.Projection;
 using System.Web.Http;
-using CinemAPI.Domain.Contracts.Contracts;
+using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 
 namespace CinemAPI.Controllers
@@ -37,7 +37,7 @@ namespace CinemAPI.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult AvailableSeats(int id)
+        public IHttpActionResult AvailableSeats(long id)
         {
             GetAvailableSeatsCountSummary summary = getAvailableSeatsCount.Handle(id);
 

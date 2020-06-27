@@ -111,6 +111,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ProjectionController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -118,6 +119,7 @@
     <Compile Include="Models\Input\Movie\MovieCreationModel.cs" />
     <Compile Include="Models\Input\Projection\ProjectionCreationModel.cs" />
     <Compile Include="Models\Input\Room\RoomCreationModel.cs" />
+    <Compile Include="Models\Input\Ticket\ReserveSeatsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

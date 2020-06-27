@@ -16,7 +16,7 @@ namespace CinemAPI.Data.Implementation
             this.db = db;
         }
 
-        public IProjection GetProjectionById(int projectionId)
+        public IProjection GetById(long projectionId)
         {
             return db.Projections.FirstOrDefault(p => p.Id == projectionId);
         }
@@ -41,6 +41,20 @@ namespace CinemAPI.Data.Implementation
             Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate, proj.AvailableSeatsCount);
 
             db.Projections.Add(newProj);
+            db.SaveChanges();
+        }
+
+        public void DecreaseAvailableSeats(long projectionId, int seatsCount)
+        {
+            Projection projection = db.Projections.FirstOrDefault(p => p.Id == projectionId);
+
+            if (projection == null)
+            {
+                return;
+            }
+
+            projection.AvailableSeatsCount -= seatsCount;
+
             db.SaveChanges();
         }
     }
