@@ -24,7 +24,7 @@ namespace CinemAPI.Domain.Projections.GetAvailableSeatsCount
                 return new GetAvailableSeatsCountSummary($"A projection with Id {projectionId} does not exist.");
             }
 
-            if (projection.StartDate > DateTime.UtcNow)
+            if (projection.StartDate <= DateTime.UtcNow)
             {
                 return new GetAvailableSeatsCountSummary($"The projection with Id {projectionId} has already started or has finished.");
             }

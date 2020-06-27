@@ -58,11 +58,16 @@
     <Compile Include="Migrations\202006261138501_AddAvailableSeatsCountColumnToProjections.Designer.cs">
       <DependentUpon>202006261138501_AddAvailableSeatsCountColumnToProjections.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006270828267_AddTicketsTable.cs" />
+    <Compile Include="Migrations\202006270828267_AddTicketsTable.Designer.cs">
+      <DependentUpon>202006270828267_AddTicketsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="IModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ProjectionModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\RoomModelConfiguration.cs" />
+    <Compile Include="ModelConfigurations\TicketModelConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006261138501_AddAvailableSeatsCountColumnToProjections.resx">
       <DependentUpon>202006261138501_AddAvailableSeatsCountColumnToProjections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006270828267_AddTicketsTable.resx">
+      <DependentUpon>202006270828267_AddTicketsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

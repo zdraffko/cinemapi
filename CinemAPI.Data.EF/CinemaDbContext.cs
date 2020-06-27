@@ -24,6 +24,8 @@ namespace CinemAPI.Data.EF
 
         public virtual IDbSet<Projection> Projections { get; set; }
 
+        public virtual IDbSet<Ticket> Tickets { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             IEnumerable<IModelConfiguration> modelConfigurations = new List<IModelConfiguration>()
@@ -32,6 +34,7 @@ namespace CinemAPI.Data.EF
                 new MovieModelConfiguration(),
                 new ProjectionModelConfiguration(),
                 new RoomModelConfiguration(),
+                new TicketModelConfiguration(),
             };
 
             foreach (IModelConfiguration configurationModel in modelConfigurations)
