@@ -41,9 +41,53 @@ namespace CinemAPI.Data.Implementation
             db.SaveChanges();
         }
 
+        public void ReserveSeats(long projectionId, int row, int column)
+        {
+            Ticket ticket = this.Get(projectionId, row, column) as Ticket;
+
+            if (ticket == null)
+            {
+                this.Insert(new Ticket(
+                    projectionId,
+                    row,
+                    column,
+                    true,
+                    false)
+                );
+
+                return;
+            }
+
+            ticket.IsReserved = true;
+
+            db.SaveChanges();
+        }
+
+        public void BuyWithoutReservation(long projectionId, int row, int column)
+        {
+            Ticket ticket = this.Get(projectionId, row, column) as Ticket;
+
+            if (ticket == null)
+            {
+                this.Insert(new Ticket(
+                    projectionId,
+                    row,
+                    column,
+                    false,
+                    true)
+                );
+
+                return;
+            }
+
+            ticket.IsBought = true;
+
+            db.SaveChanges();
+        }
+
         public void CancelReservation(long ticketId)
         {
-            Ticket ticket = db.Tickets.FirstOrDefault(t => t.Id == ticketId);
+            Ticket ticket = this.GetById(ticketId) as Ticket;
 
             if (ticket == null)
             {

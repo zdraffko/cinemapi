@@ -8,9 +8,9 @@ using CinemAPI.Models.Contracts.Projection;
 using CinemAPI.Models.Contracts.Room;
 using CinemAPI.Models.Contracts.Ticket;
 
-namespace CinemAPI.Domain.Tickets.ReserveSeats
+namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
 {
-    public class ReserveSeatsHandler : IReserveSeats
+    public class BuyWithoutReservationHandler : IBuyWithoutReservation
     {
         private readonly ITicketRepository ticketsRepo;
         private readonly IProjectionRepository projectionsRepo;
@@ -18,7 +18,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
         private readonly IRoomRepository roomsRepo;
         private readonly ICinemaRepository cinemasRepo;
 
-        public ReserveSeatsHandler(
+        public BuyWithoutReservationHandler(
             ITicketRepository ticketsRepo,
             IProjectionRepository projectionsRepo,
             IMovieRepository moviesRepo,
@@ -32,9 +32,9 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
             this.cinemasRepo = cinemasRepo;
         }
 
-        public ReserveSeatsSummary Handle(long projectionId, int row, int column)
+        public BuyWithoutReservationSummary Handle(long projectionId, int row, int column)
         {
-            ticketsRepo.ReserveSeats(projectionId, row, column);
+            ticketsRepo.BuyWithoutReservation(projectionId, row, column);
             projectionsRepo.DecreaseAvailableSeats(projectionId, 1);
 
             ITicket newTicket = ticketsRepo.Get(projectionId, row, column);
@@ -43,7 +43,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
             IRoom room = roomsRepo.GetById(projection.RoomId);
             ICinema cinema = cinemasRepo.GetById(room.CinemaId);
 
-            return new ReserveSeatsSummary(new TicketDto
+            return new BuyWithoutReservationSummary(new TicketDto
             {
                 Id = newTicket.Id,
                 ProjectionStartDate = projection.StartDate,

@@ -1,10 +1,6 @@
 ﻿using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
-using CinemAPI.Models.Contracts.Cinema;
-using CinemAPI.Models.Contracts.Movie;
-using CinemAPI.Models.Contracts.Projection;
-using CinemAPI.Models.Contracts.Room;
 using CinemAPI.Models.Contracts.Ticket;
 
 namespace CinemAPI.Domain.Tickets.ReserveSeats
@@ -25,6 +21,11 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
         public ReserveSeatsSummary Handle(long projectionId, int row, int column)
         {
             ITicket ticket = ticketsRepo.Get(projectionId, row, column);
+
+            if (ticket != null && ticket.IsBought)
+            {
+                return new ReserveSeatsSummary($"The seat at row {row} and column {column} is already bought.");
+            }
 
             if (ticket != null && ticket.IsReserved)
             {

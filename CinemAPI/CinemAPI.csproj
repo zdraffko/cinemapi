@@ -119,6 +119,7 @@
     <Compile Include="Models\Input\Movie\MovieCreationModel.cs" />
     <Compile Include="Models\Input\Projection\ProjectionCreationModel.cs" />
     <Compile Include="Models\Input\Room\RoomCreationModel.cs" />
+    <Compile Include="Models\Input\Ticket\BuyWithoutReservationModel.cs" />
     <Compile Include="Models\Input\Ticket\ReserveSeatsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,6 +10,10 @@ namespace CinemAPI.Data
 
         void Insert(ITicketCreation ticket);
 
+        void ReserveSeats(long projectionId, int row, int column);
+
+        void BuyWithoutReservation(long projectionId, int row, int column);
+
         void CancelReservation(long ticketId);
 
         int CancelReservationsForProjection(long projectionId);

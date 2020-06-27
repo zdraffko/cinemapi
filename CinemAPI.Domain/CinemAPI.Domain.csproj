@@ -49,6 +49,9 @@
     <Compile Include="Projections\NewProjection\NewProjectionPreviousOverlapValidation.cs" />
     <Compile Include="Projections\NewProjection\NewProjectionUniqueValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tickets\BuyWithoutReservation\BuyWithoutReservationHandler.cs" />
+    <Compile Include="Tickets\BuyWithoutReservation\ProjectionValidation.cs" />
+    <Compile Include="Tickets\BuyWithoutReservation\SeatsValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ExistingSeatsValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ReservedSeatsValidation.cs" />
     <Compile Include="Tickets\ReserveSeats\ReserveSeatsHandler.cs" />

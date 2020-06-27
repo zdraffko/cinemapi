@@ -46,7 +46,7 @@ namespace CinemAPI.Data.Implementation
 
         public void DecreaseAvailableSeats(long projectionId, int seatsCount)
         {
-            Projection projection = db.Projections.FirstOrDefault(p => p.Id == projectionId);
+            Projection projection = this.GetById(projectionId) as Projection;
 
             if (projection == null)
             {
@@ -60,7 +60,7 @@ namespace CinemAPI.Data.Implementation
 
         public void IncreaseAvailableSeats(long projectionId, int seatsCount)
         {
-            Projection projection = db.Projections.FirstOrDefault(p => p.Id == projectionId);
+            Projection projection = this.GetById(projectionId) as Projection;
 
             if (projection == null)
             {
