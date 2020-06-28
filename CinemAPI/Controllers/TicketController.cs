@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -25,7 +26,16 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Reserve(ReserveSeatsModel model)
         {
-            ReserveSeatsSummary summary = await reserveSeats.Handle(model.ProjectionId, model.Row, model.Column);
+            ReserveSeatsSummary summary;
+
+            try
+            {
+                summary = await reserveSeats.Handle(model.ProjectionId, model.Row, model.Column);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong during the reservation.");
+            }
 
             if (!summary.IsSuccessful)
             {
@@ -38,7 +48,16 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Buy(BuyWithoutReservationModel model)
         {
-            BuyWithoutReservationSummary summary = await buyWithoutReservation.Handle(model.ProjectionId, model.Row, model.Column);
+            BuyWithoutReservationSummary summary;
+
+            try
+            {
+                summary = await buyWithoutReservation.Handle(model.ProjectionId, model.Row, model.Column);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong while buying a ticket.");
+            }
 
             if (!summary.IsSuccessful)
             {
@@ -51,7 +70,16 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Buy(long id)
         {
-            BuyWithReservationSummary summary = await buyWithReservation.Handle(id);
+            BuyWithReservationSummary summary;
+
+            try
+            {
+                summary = await buyWithReservation.Handle(id);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong while buying a ticket.");
+            }
 
             if (!summary.IsSuccessful)
             {

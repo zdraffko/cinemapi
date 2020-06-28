@@ -35,5 +35,7 @@ namespace CinemAPI.Models
         public bool IsReserved { get; set; }
 
         public bool IsBought { get; set; }
+
+        public byte[] RowVersion { get; set; }
     }
 }

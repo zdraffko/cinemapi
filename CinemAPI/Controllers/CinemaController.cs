@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Cinema;
@@ -19,16 +20,23 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Index(CinemaCreationModel model)
         {
-            ICinema cinema = await cinemaRepo.GetByNameAndAddress(model.Name, model.Address);
-
-            if (cinema == null)
+            try
             {
-                await cinemaRepo.Insert(new Cinema(model.Name, model.Address));
+                ICinema cinema = await cinemaRepo.GetByNameAndAddress(model.Name, model.Address);
 
-                return Ok();
+                if (cinema == null)
+                {
+                    await cinemaRepo.Insert(new Cinema(model.Name, model.Address));
+
+                    return Ok();
+                }
+
+                return BadRequest("Cinema already exists");
             }
-
-            return BadRequest("Cinema already exists");
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong while creating a cinema.");
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Movie;
@@ -19,16 +20,24 @@ namespace CinemAPI.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Index(MovieCreationModel model)
         {
-            IMovie movie = await movieRepo.GetByNameAndDuration(model.Name, model.DurationMinutes);
-
-            if (movie == null)
+            try
             {
-                await movieRepo.Insert(new Movie(model.Name, model.DurationMinutes));
+                IMovie movie = await movieRepo.GetByNameAndDuration(model.Name, model.DurationMinutes);
 
-                return Ok();
+                if (movie == null)
+                {
+                    await movieRepo.Insert(new Movie(model.Name, model.DurationMinutes));
+
+                    return Ok();
+                }
+
+                return BadRequest("Movie already exists");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Something went wrong while creating a movie.");
             }
 
-            return BadRequest("Movie already exists");
         }
     }
 }

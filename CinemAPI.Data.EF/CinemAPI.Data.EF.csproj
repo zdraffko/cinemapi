@@ -70,6 +70,10 @@
     <Compile Include="Migrations\202006280816234_AddIsReservableToProjectionsTable.Designer.cs">
       <DependentUpon>202006280816234_AddIsReservableToProjectionsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006281738233_AddRowVersionColumnToTheTicketsTable.cs" />
+    <Compile Include="Migrations\202006281738233_AddRowVersionColumnToTheTicketsTable.Designer.cs">
+      <DependentUpon>202006281738233_AddRowVersionColumnToTheTicketsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="IModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006280816234_AddIsReservableToProjectionsTable.resx">
       <DependentUpon>202006280816234_AddIsReservableToProjectionsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006281738233_AddRowVersionColumnToTheTicketsTable.resx">
+      <DependentUpon>202006281738233_AddRowVersionColumnToTheTicketsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

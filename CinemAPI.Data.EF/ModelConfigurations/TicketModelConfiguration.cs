@@ -17,6 +17,7 @@ namespace CinemAPI.Data.EF.ModelConfigurations
             ticketModel.Property(model => model.Column).IsRequired();
             ticketModel.Property(model => model.IsReserved).IsRequired();
             ticketModel.Property(model => model.IsBought).IsRequired();
+            ticketModel.Property(model => model.RowVersion).IsRowVersion();
 
             ticketModel.HasIndex(model => new
             {
