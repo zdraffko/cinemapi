@@ -4,6 +4,7 @@ using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Movie;
 using CinemAPI.Models.Contracts.Projection;
+using static CinemAPI.Domain.Constants.ReservationConstants;
 
 namespace CinemAPI.Domain.Tickets.ReserveSeats
 {
@@ -45,7 +46,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
                 return new ReserveSeatsSummary($"The projection with Id {projectionId} has already started.");
             }
 
-            if (projection.StartDate - TimeSpan.FromMinutes(10) <= DateTime.UtcNow)
+            if (projection.StartDate - TimeSpan.FromMinutes(MinutesUntilReservationExpires) <= DateTime.UtcNow)
             {
                 return new ReserveSeatsSummary($"The projection with Id {projectionId} is starting in less than 10 minutes.");
             }

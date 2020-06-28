@@ -2,6 +2,7 @@
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Models.Contracts.Projection;
+using static CinemAPI.Domain.Constants.ReservationConstants;
 
 namespace CinemAPI.Domain.Common
 {
@@ -25,7 +26,7 @@ namespace CinemAPI.Domain.Common
                 return;
             }
 
-            if (projection.StartDate - TimeSpan.FromMinutes(10) > DateTime.UtcNow)
+            if (projection.StartDate - TimeSpan.FromMinutes(MinutesUntilReservationExpires) > DateTime.UtcNow)
             {
                 return;
             }

@@ -5,6 +5,7 @@ using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Projection;
 using CinemAPI.Models.Contracts.Ticket;
+using static CinemAPI.Domain.Constants.ReservationConstants;
 
 namespace CinemAPI.Domain.Tickets.BuyWithReservation
 {
@@ -39,7 +40,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
             cancelExpiredReservations.Cancel(ticket.ProjectionId);
             IProjection projection = projectionsRepo.GetById(ticket.ProjectionId);
 
-            if (projection.StartDate - TimeSpan.FromMinutes(10) <= DateTime.UtcNow)
+            if (projection.StartDate - TimeSpan.FromMinutes(MinutesUntilReservationExpires) <= DateTime.UtcNow)
             {
                 return new BuyWithReservationSummary($"The reservation with Id {ticketId} has expired.");
             }
