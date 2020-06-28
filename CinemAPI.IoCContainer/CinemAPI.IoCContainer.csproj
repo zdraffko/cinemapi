@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataPackage.cs" />
+    <Compile Include="DomainPackages\Common\CancelExpiredReservationsPackage.cs" />
     <Compile Include="DomainPackages\Projections\GetAvailableSeatsCountPackage.cs" />
     <Compile Include="DomainPackages\Projections\NewProjectionPackage.cs" />
     <Compile Include="DomainPackages\Tickets\BuyWithoutReservationPackage.cs" />

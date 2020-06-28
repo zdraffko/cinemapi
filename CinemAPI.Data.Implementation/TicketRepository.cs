@@ -2,6 +2,7 @@
 using CinemAPI.Data.EF;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Ticket;
+using CinemAPI.Models.DTOs;
 
 namespace CinemAPI.Data.Implementation
 {
@@ -130,6 +131,23 @@ namespace CinemAPI.Data.Implementation
             db.SaveChanges();
 
             return canceledReservationsCount;
+        }
+
+        public FullTicketInfoDto GetFullTicketInformation(long ticketId)
+        {
+            return db.Tickets
+                .Where(t => t.Id == ticketId)
+                .Select(t => new FullTicketInfoDto()
+                {
+                    Id = t.Id,
+                    ProjectionStartDate = t.Projection.StartDate,
+                    MovieName = t.Projection.Movie.Name,
+                    CinemaName = t.Projection.Room.Cinema.Name,
+                    RoomNumber = t.Projection.Room.Number,
+                    Row = t.Row,
+                    Column = t.Column
+                })
+                .FirstOrDefault();
         }
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cinema.cs" />
+    <Compile Include="DTOs\FullTicketInfoDto.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Projection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,5 +54,6 @@
       <Name>CinemAPI.Models.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

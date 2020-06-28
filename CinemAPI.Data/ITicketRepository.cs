@@ -1,4 +1,5 @@
 ﻿using CinemAPI.Models.Contracts.Ticket;
+using CinemAPI.Models.DTOs;
 
 namespace CinemAPI.Data
 {
@@ -19,5 +20,7 @@ namespace CinemAPI.Data
         void CancelReservation(long ticketId);
 
         int CancelReservationsForProjection(long projectionId);
+
+        FullTicketInfoDto GetFullTicketInformation(long ticketId);
     }
 }
