@@ -10,6 +10,7 @@ namespace CinemAPI.IoCContainer.DomainPackages.Projections
         public void RegisterServices(Container container)
         {
             container.Register<INewProjection, NewProjectionCreation>();
+            container.RegisterDecorator<INewProjection, NewProjectionAvailableSeatsValidation>();
             container.RegisterDecorator<INewProjection, NewProjectionMovieValidation>();
             container.RegisterDecorator<INewProjection, NewProjectionUniqueValidation>();
             container.RegisterDecorator<INewProjection, NewProjectionRoomValidation>();

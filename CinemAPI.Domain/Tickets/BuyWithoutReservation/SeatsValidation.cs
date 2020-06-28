@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -30,11 +31,11 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
             this.cancelExpiredReservations = cancelExpiredReservations;
         }
 
-        public BuyWithoutReservationSummary Handle(long projectionId, int row, int column)
+        public async Task<BuyWithoutReservationSummary> Handle(long projectionId, int row, int column)
         {
-            ITicket ticket = ticketsRepo.Get(projectionId, row, column);
-            IProjection projection = projectionsRepo.GetById(projectionId);
-            IRoom room = roomsRepo.GetById(projection.RoomId);
+            ITicket ticket = await ticketsRepo.Get(projectionId, row, column);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
+            IRoom room = await roomsRepo.GetById(projection.RoomId);
 
             if (row > room.Rows || row < 0)
             {
@@ -46,7 +47,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
                 return new BuyWithoutReservationSummary($"The room does not have a number {column} column.");
             }
 
-            cancelExpiredReservations.Cancel(projectionId);
+            await cancelExpiredReservations.Cancel(projectionId);
 
             if (ticket != null && ticket.IsBought)
             {
@@ -58,7 +59,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
                 return new BuyWithoutReservationSummary($"The seat at row {row} and column {column} is already reserved.");
             }
 
-            return buyWithoutReservation.Handle(projectionId, row, column);
+            return await buyWithoutReservation.Handle(projectionId, row, column);
         }
     }
 }

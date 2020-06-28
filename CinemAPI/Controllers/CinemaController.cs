@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Cinema;
 using CinemAPI.Models.Input.Cinema;
@@ -16,13 +17,13 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Index(CinemaCreationModel model)
+        public async Task<IHttpActionResult> Index(CinemaCreationModel model)
         {
-            ICinema cinema = cinemaRepo.GetByNameAndAddress(model.Name, model.Address);
+            ICinema cinema = await cinemaRepo.GetByNameAndAddress(model.Name, model.Address);
 
             if (cinema == null)
             {
-                cinemaRepo.Insert(new Cinema(model.Name, model.Address));
+                await cinemaRepo.Insert(new Cinema(model.Name, model.Address));
 
                 return Ok();
             }

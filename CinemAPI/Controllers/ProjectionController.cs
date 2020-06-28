@@ -1,4 +1,5 @@
-﻿using CinemAPI.Models;
+﻿using System.Threading.Tasks;
+using CinemAPI.Models;
 using CinemAPI.Models.Input.Projection;
 using System.Web.Http;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
@@ -18,9 +19,9 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Index(ProjectionCreationModel model)
+        public async Task<IHttpActionResult> Index(ProjectionCreationModel model)
         {
-            NewProjectionSummary summary = newProj.New(new Projection(
+            NewProjectionSummary summary = await newProj.New(new Projection(
                 model.MovieId,
                 model.RoomId,
                 model.StartDate,
@@ -38,9 +39,9 @@ namespace CinemAPI.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult AvailableSeats(long id)
+        public async Task<IHttpActionResult> AvailableSeats(long id)
         {
-            GetAvailableSeatsCountSummary summary = getAvailableSeatsCount.Handle(id);
+            GetAvailableSeatsCountSummary summary = await getAvailableSeatsCount.Handle(id);
 
             if (!summary.IsValid)
             {

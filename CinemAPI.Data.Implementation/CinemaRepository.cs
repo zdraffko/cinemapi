@@ -1,7 +1,9 @@
-﻿using CinemAPI.Data.EF;
+﻿using System.Data.Entity;
+using CinemAPI.Data.EF;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Cinema;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CinemAPI.Data.Implementation
 {
@@ -14,25 +16,25 @@ namespace CinemAPI.Data.Implementation
             this.db = db;
         }
 
-        public ICinema GetById(int cinemaId)
+        public async Task<ICinema> GetById(int cinemaId)
         {
-            return db.Cinemas.FirstOrDefault(c => c.Id == cinemaId);
+            return await db.Cinemas.FirstOrDefaultAsync(c => c.Id == cinemaId);
         }
 
-        public ICinema GetByNameAndAddress(string name, string address)
+        public async Task<ICinema> GetByNameAndAddress(string name, string address)
         {
-            return db.Cinemas.Where(x => x.Name == name &&
+            return await db.Cinemas.Where(x => x.Name == name &&
                                          x.Address == address)
-                             .FirstOrDefault();
+                             .FirstOrDefaultAsync();
         }
 
-        public void Insert(ICinemaCreation cinema)
+        public async Task Insert(ICinemaCreation cinema)
         {
             Cinema newCinema = new Cinema(cinema.Name, cinema.Address);
 
             db.Cinemas.Add(newCinema);
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
     }
 }

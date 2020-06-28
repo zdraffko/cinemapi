@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.DTOs;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -10,24 +11,17 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
     public class BuyWithReservationHandler : IBuyWithReservation
     {
         private readonly ITicketRepository ticketsRepo;
-        private readonly IProjectionRepository projectionsRepo;
 
         public BuyWithReservationHandler(
-            ITicketRepository ticketsRepo,
-            IProjectionRepository projectionsRepo)
+            ITicketRepository ticketsRepo)
         {
             this.ticketsRepo = ticketsRepo;
-            this.projectionsRepo = projectionsRepo;
         }
 
-        public BuyWithReservationSummary Handle(long ticketId)
+        public async Task<BuyWithReservationSummary> Handle(long ticketId)
         {
-            ticketsRepo.BuyWithReservation(ticketId);
-
-            ITicket ticket = ticketsRepo.GetById(ticketId);
-
-            projectionsRepo.DecreaseAvailableSeats(ticket.ProjectionId, 1);
-            FullTicketInfoDto ticketInfo = ticketsRepo.GetFullTicketInformation(ticketId);
+            await ticketsRepo.BuyWithReservation(ticketId);
+            FullTicketInfoDto ticketInfo = await ticketsRepo.GetFullTicketInformation(ticketId);
 
             return new BuyWithReservationSummary(new TicketDto
             {

@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Movie;
 using CinemAPI.Models.Input.Movie;
@@ -16,13 +17,13 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Index(MovieCreationModel model)
+        public async Task<IHttpActionResult> Index(MovieCreationModel model)
         {
-            IMovie movie = movieRepo.GetByNameAndDuration(model.Name, model.DurationMinutes);
+            IMovie movie = await movieRepo.GetByNameAndDuration(model.Name, model.DurationMinutes);
 
             if (movie == null)
             {
-                movieRepo.Insert(new Movie(model.Name, model.DurationMinutes));
+                await movieRepo.Insert(new Movie(model.Name, model.DurationMinutes));
 
                 return Ok();
             }

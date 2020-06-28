@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.DTOs;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -20,13 +21,13 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
             this.projectionsRepo = projectionsRepo; ;
         }
 
-        public BuyWithoutReservationSummary Handle(long projectionId, int row, int column)
+        public async Task<BuyWithoutReservationSummary> Handle(long projectionId, int row, int column)
         {
-            ticketsRepo.BuyWithoutReservation(projectionId, row, column);
-            projectionsRepo.DecreaseAvailableSeats(projectionId, 1);
+            await ticketsRepo.BuyWithoutReservation(projectionId, row, column);
+            await projectionsRepo.DecreaseAvailableSeats(projectionId, 1);
 
-            ITicket newTicket = ticketsRepo.Get(projectionId, row, column);
-            FullTicketInfoDto ticketInfo = ticketsRepo.GetFullTicketInformation(newTicket.Id);
+            ITicket newTicket = await ticketsRepo.Get(projectionId, row, column);
+            FullTicketInfoDto ticketInfo = await ticketsRepo.GetFullTicketInformation(newTicket.Id);
 
             return new BuyWithoutReservationSummary(new TicketDto
             {

@@ -3,7 +3,9 @@ using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Projection;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CinemAPI.Data.Implementation
 {
@@ -16,14 +18,14 @@ namespace CinemAPI.Data.Implementation
             this.db = db;
         }
 
-        public IProjection GetById(long projectionId)
+        public async Task<IProjection> GetById(long projectionId)
         {
-            return db.Projections.FirstOrDefault(p => p.Id == projectionId);
+            return await db.Projections.FirstOrDefaultAsync(p => p.Id == projectionId);
         }
 
-        public IProjection Get(int movieId, int roomId, DateTime startDate)
+        public async Task<IProjection> Get(int movieId, int roomId, DateTime startDate)
         {
-            return db.Projections.FirstOrDefault(x => x.MovieId == movieId &&
+            return await db.Projections.FirstOrDefaultAsync(x => x.MovieId == movieId &&
                                                       x.RoomId == roomId &&
                                                       x.StartDate == startDate);
         }
@@ -36,17 +38,17 @@ namespace CinemAPI.Data.Implementation
                                              x.StartDate > now);
         }
 
-        public void Insert(IProjectionCreation proj)
+        public async Task Insert(IProjectionCreation proj)
         {
             Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate, proj.AvailableSeatsCount, proj.IsReservable);
 
             db.Projections.Add(newProj);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void DecreaseAvailableSeats(long projectionId, int seatsCount)
+        public async Task DecreaseAvailableSeats(long projectionId, int seatsCount)
         {
-            Projection projection = this.GetById(projectionId) as Projection;
+            Projection projection = await this.GetById(projectionId) as Projection;
 
             if (projection == null)
             {
@@ -55,12 +57,12 @@ namespace CinemAPI.Data.Implementation
 
             projection.AvailableSeatsCount -= seatsCount;
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void IncreaseAvailableSeats(long projectionId, int seatsCount)
+        public async Task IncreaseAvailableSeats(long projectionId, int seatsCount)
         {
-            Projection projection = this.GetById(projectionId) as Projection;
+            Projection projection = await this.GetById(projectionId) as Projection;
 
             if (projection == null)
             {
@@ -69,12 +71,12 @@ namespace CinemAPI.Data.Implementation
 
             projection.AvailableSeatsCount += seatsCount;
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void ChangeReservationPolicy(long projectionId, bool isReservable)
+        public async Task ChangeReservationPolicy(long projectionId, bool isReservable)
         {
-            Projection projection = this.GetById(projectionId) as Projection;
+            Projection projection = await this.GetById(projectionId) as Projection;
 
             if (projection == null)
             {
@@ -83,7 +85,7 @@ namespace CinemAPI.Data.Implementation
 
             projection.IsReservable = isReservable;
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
     }
 }

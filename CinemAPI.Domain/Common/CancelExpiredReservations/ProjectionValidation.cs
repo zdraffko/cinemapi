@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Models.Contracts.Projection;
@@ -17,9 +18,9 @@ namespace CinemAPI.Domain.Common.CancelExpiredReservations
             this.projectionsRepo = projectionsRepo;
         }
 
-        public void Cancel(long projectionId)
+        public async Task Cancel(long projectionId)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
 
             if (projection == null)
             {
@@ -36,7 +37,7 @@ namespace CinemAPI.Domain.Common.CancelExpiredReservations
                 return;
             }
 
-            cancelExpiredReservations.Cancel(projectionId);
+            await cancelExpiredReservations.Cancel(projectionId);
         }
     }
 }

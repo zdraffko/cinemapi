@@ -1,7 +1,9 @@
-﻿namespace CinemAPI.Domain.Contracts.Contracts.Common
+﻿using System.Threading.Tasks;
+
+namespace CinemAPI.Domain.Contracts.Contracts.Common
 {
     public interface ICancelExpiredReservations
     {
-        void Cancel(long projectionId);
+        Task Cancel(long projectionId);
     }
 }

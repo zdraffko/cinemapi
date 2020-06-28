@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using CinemAPI.Data.EF;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Ticket;
@@ -15,20 +17,20 @@ namespace CinemAPI.Data.Implementation
             this.db = db;
         }
 
-        public ITicket GetById(long ticketId)
+        public async Task<ITicket> GetById(long ticketId)
         {
-            return db.Tickets.FirstOrDefault(t => t.Id == ticketId);
+            return await db.Tickets.FirstOrDefaultAsync(t => t.Id == ticketId);
         }
 
-        public ITicket Get(long projectionId, int row, int column)
+        public async Task<ITicket> Get(long projectionId, int row, int column)
         {
-            return db.Tickets.FirstOrDefault(t =>
+            return await db.Tickets.FirstOrDefaultAsync(t =>
                 t.ProjectionId == projectionId &&
                 t.Row == row &&
                 t.Column == column);
         }
 
-        public void Insert(ITicketCreation ticket)
+        public async Task Insert(ITicketCreation ticket)
         {
             Ticket newTicket = new Ticket(
                 ticket.ProjectionId,
@@ -39,16 +41,16 @@ namespace CinemAPI.Data.Implementation
                 );
 
             db.Tickets.Add(newTicket);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void ReserveSeats(long projectionId, int row, int column)
+        public async Task ReserveSeats(long projectionId, int row, int column)
         {
-            Ticket ticket = this.Get(projectionId, row, column) as Ticket;
+            Ticket ticket = await this.Get(projectionId, row, column) as Ticket;
 
             if (ticket == null)
             {
-                this.Insert(new Ticket(
+                await this.Insert(new Ticket(
                     projectionId,
                     row,
                     column,
@@ -61,16 +63,16 @@ namespace CinemAPI.Data.Implementation
                 ticket.IsReserved = true;
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void BuyWithoutReservation(long projectionId, int row, int column)
+        public async Task BuyWithoutReservation(long projectionId, int row, int column)
         {
-            Ticket ticket = this.Get(projectionId, row, column) as Ticket;
+            Ticket ticket = await this.Get(projectionId, row, column) as Ticket;
 
             if (ticket == null)
             {
-                this.Insert(new Ticket(
+                await this.Insert(new Ticket(
                     projectionId,
                     row,
                     column,
@@ -83,12 +85,12 @@ namespace CinemAPI.Data.Implementation
                 ticket.IsBought = true;
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void BuyWithReservation(long ticketId)
+        public async Task BuyWithReservation(long ticketId)
         {
-            Ticket ticket = this.GetById(ticketId) as Ticket;
+            Ticket ticket = await this.GetById(ticketId) as Ticket;
 
             if (ticket == null)
             {
@@ -97,12 +99,12 @@ namespace CinemAPI.Data.Implementation
 
             ticket.IsBought = true;
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public void CancelReservation(long ticketId)
+        public async Task CancelReservation(long ticketId)
         {
-            Ticket ticket = this.GetById(ticketId) as Ticket;
+            Ticket ticket = await this.GetById(ticketId) as Ticket;
 
             if (ticket == null)
             {
@@ -111,10 +113,10 @@ namespace CinemAPI.Data.Implementation
 
             ticket.IsReserved = false;
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
-        public int CancelReservationsForProjection(long projectionId)
+        public async Task<int> CancelReservationsForProjection(long projectionId)
         {
             IQueryable<Ticket> tickets = db.Tickets.Where(t => t.ProjectionId == projectionId);
 
@@ -128,14 +130,14 @@ namespace CinemAPI.Data.Implementation
                 }
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return canceledReservationsCount;
         }
 
-        public FullTicketInfoDto GetFullTicketInformation(long ticketId)
+        public async Task<FullTicketInfoDto> GetFullTicketInformation(long ticketId)
         {
-            return db.Tickets
+            return await db.Tickets
                 .Where(t => t.Id == ticketId)
                 .Select(t => new FullTicketInfoDto()
                 {
@@ -147,7 +149,7 @@ namespace CinemAPI.Data.Implementation
                     Row = t.Row,
                     Column = t.Column
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
     }
 }

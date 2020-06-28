@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 using CinemAPI.Models.Contracts.Projection;
@@ -16,16 +17,16 @@ namespace CinemAPI.Domain.Projections.NewProjection
             this.newProj = newProj;
         }
 
-        public NewProjectionSummary New(IProjectionCreation proj)
+        public async Task<NewProjectionSummary> New(IProjectionCreation proj)
         {
-            IProjection projection = projectRepo.Get(proj.MovieId, proj.RoomId, proj.StartDate);
+            IProjection projection = await projectRepo.Get(proj.MovieId, proj.RoomId, proj.StartDate);
 
             if (projection != null)
             {
                 return new NewProjectionSummary(false, "Projection already exists");
             }
 
-            return newProj.New(proj);
+            return await newProj.New(proj);
         }
     }
 }

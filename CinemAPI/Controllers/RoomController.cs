@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Models;
 using CinemAPI.Models.Contracts.Room;
 using CinemAPI.Models.Input.Room;
@@ -16,13 +17,13 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Index(RoomCreationModel model)
+        public async Task<IHttpActionResult> Index(RoomCreationModel model)
         {
-            IRoom room = roomRepo.GetByCinemaAndNumber(model.CinemaId, model.Number);
+            IRoom room = await roomRepo.GetByCinemaAndNumber(model.CinemaId, model.Number);
 
             if (room == null)
             {
-                roomRepo.Insert(new Room(model.Number, model.SeatsPerRow, model.Rows, model.CinemaId));
+                await roomRepo.Insert(new Room(model.Number, model.SeatsPerRow, model.Rows, model.CinemaId));
 
                 return Ok();
             }

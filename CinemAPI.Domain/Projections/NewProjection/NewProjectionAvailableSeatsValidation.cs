@@ -1,30 +1,23 @@
 ﻿using System.Threading.Tasks;
-using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
-using CinemAPI.Models.Contracts.Movie;
 using CinemAPI.Models.Contracts.Projection;
 
 namespace CinemAPI.Domain.Projections.NewProjection
 {
-    public class NewProjectionMovieValidation : INewProjection
+    public class NewProjectionAvailableSeatsValidation : INewProjection
     {
-        private readonly IMovieRepository movieRepo;
         private readonly INewProjection newProj;
 
-        public NewProjectionMovieValidation(IMovieRepository movieRepo, INewProjection newProj)
+        public NewProjectionAvailableSeatsValidation(INewProjection newProj)
         {
-            this.movieRepo = movieRepo;
             this.newProj = newProj;
         }
-
         public async Task<NewProjectionSummary> New(IProjectionCreation projection)
         {
-            IMovie movie = await movieRepo.GetById(projection.MovieId);
-
-            if (movie == null)
+            if (projection.AvailableSeatsCount < 0)
             {
-                return new NewProjectionSummary(false, $"Movie with id {projection.MovieId} does not exist");
+                return new NewProjectionSummary(false, "The projection can not have less than 0 available seats.");
             }
 
             return await newProj.New(projection);

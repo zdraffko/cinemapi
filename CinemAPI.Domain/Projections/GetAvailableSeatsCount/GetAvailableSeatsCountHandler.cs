@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
@@ -15,9 +16,9 @@ namespace CinemAPI.Domain.Projections.GetAvailableSeatsCount
             this.projectionsRepo = projectionsRepo;
         }
 
-        public GetAvailableSeatsCountSummary Handle(long projectionId)
+        public async Task<GetAvailableSeatsCountSummary> Handle(long projectionId)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
 
             return new GetAvailableSeatsCountSummary(projection.AvailableSeatsCount);
         }

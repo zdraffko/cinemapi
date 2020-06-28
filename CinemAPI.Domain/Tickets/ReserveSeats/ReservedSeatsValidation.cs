@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Ticket;
@@ -18,9 +19,9 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
             this.ticketsRepo = ticketsRepo;
         }
 
-        public ReserveSeatsSummary Handle(long projectionId, int row, int column)
+        public async Task<ReserveSeatsSummary> Handle(long projectionId, int row, int column)
         {
-            ITicket ticket = ticketsRepo.Get(projectionId, row, column);
+            ITicket ticket = await ticketsRepo.Get(projectionId, row, column);
 
             if (ticket != null && ticket.IsBought)
             {
@@ -32,7 +33,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
                 return new ReserveSeatsSummary($"The seat at row {row} and column {column} is already reserved.");
             }
 
-            return reserveSeats.Handle(projectionId, row, column);
+            return await reserveSeats.Handle(projectionId, row, column);
         }
     }
 }

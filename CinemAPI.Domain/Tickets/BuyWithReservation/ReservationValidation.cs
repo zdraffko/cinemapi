@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
@@ -28,17 +29,17 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
             this.cancelExpiredReservations = cancelExpiredReservations;
         }
 
-        public BuyWithReservationSummary Handle(long ticketId)
+        public async Task<BuyWithReservationSummary> Handle(long ticketId)
         {
-            ITicket ticket = ticketsRepo.GetById(ticketId);
+            ITicket ticket = await ticketsRepo.GetById(ticketId);
 
             if (ticket == null)
             {
                 return new BuyWithReservationSummary($"A reservation with Id {ticketId} does not exist.");
             }
 
-            cancelExpiredReservations.Cancel(ticket.ProjectionId);
-            IProjection projection = projectionsRepo.GetById(ticket.ProjectionId);
+            await cancelExpiredReservations.Cancel(ticket.ProjectionId);
+            IProjection projection = await projectionsRepo.GetById(ticket.ProjectionId);
 
             if (projection.StartDate - TimeSpan.FromMinutes(MinutesUntilReservationExpires) <= DateTime.UtcNow)
             {
@@ -55,7 +56,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
                 return new BuyWithReservationSummary($"The reservation with Id {ticketId} has been canceled.");
             }
 
-            return buyWithReservation.Handle(ticketId);
+            return await buyWithReservation.Handle(ticketId);
         }
     }
 }

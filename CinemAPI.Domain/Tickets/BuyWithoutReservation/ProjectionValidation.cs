@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -23,16 +24,16 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
             this.moviesRepo = moviesRepo;
         }
 
-        public BuyWithoutReservationSummary Handle(long projectionId, int row, int column)
+        public async Task<BuyWithoutReservationSummary> Handle(long projectionId, int row, int column)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
 
             if (projection == null)
             {
                 return new BuyWithoutReservationSummary($"A projection with Id {projectionId} does not exist.");
             }
 
-            IMovie movie = moviesRepo.GetById(projection.MovieId);
+            IMovie movie = await moviesRepo.GetById(projection.MovieId);
 
             if (projection.StartDate + TimeSpan.FromMinutes(movie.DurationMinutes) <= DateTime.UtcNow)
             {
@@ -43,7 +44,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
             {
                 return new BuyWithoutReservationSummary($"The projection with Id {projectionId} has already started.");
             }
-            return buyWithoutReservation.Handle(projectionId, row, column);
+            return await buyWithoutReservation.Handle(projectionId, row, column);
         }
     }
 }

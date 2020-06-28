@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
@@ -23,16 +24,16 @@ namespace CinemAPI.Domain.Projections.GetAvailableSeatsCount
             this.moviesRepo = moviesRepo;
         }
 
-        public GetAvailableSeatsCountSummary Handle(long projectionId)
+        public async Task<GetAvailableSeatsCountSummary> Handle(long projectionId)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
 
             if (projection == null)
             {
                 return new GetAvailableSeatsCountSummary($"A projection with Id {projectionId} does not exist.");
             }
 
-            IMovie movie = moviesRepo.GetById(projection.MovieId);
+            IMovie movie = await moviesRepo.GetById(projection.MovieId);
 
             if (projection.StartDate + TimeSpan.FromMinutes(movie.DurationMinutes) <= DateTime.UtcNow)
             {
@@ -44,7 +45,7 @@ namespace CinemAPI.Domain.Projections.GetAvailableSeatsCount
                 return new GetAvailableSeatsCountSummary($"The projection with Id {projectionId} has already started.");
             }
 
-            return getAvailableSeatsCount.Handle(projectionId);
+            return await getAvailableSeatsCount.Handle(projectionId);
         }
     }
 }

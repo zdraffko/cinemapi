@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
@@ -25,16 +26,16 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
             this.moviesRepo = moviesRepo;
         }
 
-        public ReserveSeatsSummary Handle(long projectionId, int row, int column)
+        public async Task<ReserveSeatsSummary> Handle(long projectionId, int row, int column)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
 
             if (projection == null)
             {
                 return new ReserveSeatsSummary($"A projection with Id {projectionId} does not exist.");
             }
 
-            IMovie movie = moviesRepo.GetById(projection.MovieId);
+            IMovie movie = await moviesRepo.GetById(projection.MovieId);
 
             if (projection.StartDate + TimeSpan.FromMinutes(movie.DurationMinutes) <= DateTime.UtcNow)
             {
@@ -51,7 +52,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
                 return new ReserveSeatsSummary($"The projection with Id {projectionId} is starting in less than 10 minutes.");
             }
 
-            return reserveSeats.Handle(projectionId, row, column);
+            return await reserveSeats.Handle(projectionId, row, column);
         }
     }
 }

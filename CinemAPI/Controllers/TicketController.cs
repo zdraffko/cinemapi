@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Input.Ticket;
@@ -22,9 +23,9 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Reserve(ReserveSeatsModel model)
+        public async Task<IHttpActionResult> Reserve(ReserveSeatsModel model)
         {
-            ReserveSeatsSummary summary = reserveSeats.Handle(model.ProjectionId, model.Row, model.Column);
+            ReserveSeatsSummary summary = await reserveSeats.Handle(model.ProjectionId, model.Row, model.Column);
 
             if (!summary.IsSuccessful)
             {
@@ -35,9 +36,9 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Buy(BuyWithoutReservationModel model)
+        public async Task<IHttpActionResult> Buy(BuyWithoutReservationModel model)
         {
-            BuyWithoutReservationSummary summary = buyWithoutReservation.Handle(model.ProjectionId, model.Row, model.Column);
+            BuyWithoutReservationSummary summary = await buyWithoutReservation.Handle(model.ProjectionId, model.Row, model.Column);
 
             if (!summary.IsSuccessful)
             {
@@ -48,9 +49,9 @@ namespace CinemAPI.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Buy(long id)
+        public async Task<IHttpActionResult> Buy(long id)
         {
-            BuyWithReservationSummary summary = buyWithReservation.Handle(id);
+            BuyWithReservationSummary summary = await buyWithReservation.Handle(id);
 
             if (!summary.IsSuccessful)
             {

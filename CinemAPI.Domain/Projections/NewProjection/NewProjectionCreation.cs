@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.ProjectionContracts;
 using CinemAPI.Domain.Contracts.Models.ProjectionModels;
 using CinemAPI.Models;
@@ -15,14 +16,9 @@ namespace CinemAPI.Domain.Projections.NewProjection
             this.projectionsRepo = projectionsRepo;
         }
 
-        public NewProjectionSummary New(IProjectionCreation projection)
+        public async Task<NewProjectionSummary> New(IProjectionCreation projection)
         {
-            if (projection.AvailableSeatsCount < 0)
-            {
-                return new NewProjectionSummary(false, "The projection can not have less than 0 available seats.");
-            }
-
-            projectionsRepo.Insert(new Projection(
+            await projectionsRepo.Insert(new Projection(
                 projection.MovieId,
                 projection.RoomId,
                 projection.StartDate,

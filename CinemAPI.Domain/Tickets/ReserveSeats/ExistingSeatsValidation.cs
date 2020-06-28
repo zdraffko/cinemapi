@@ -1,4 +1,5 @@
-﻿using CinemAPI.Data;
+﻿using System.Threading.Tasks;
+using CinemAPI.Data;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Projection;
@@ -23,10 +24,10 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
             this.roomsRepo = roomsRepo;
         }
 
-        public ReserveSeatsSummary Handle(long projectionId, int row, int column)
+        public async Task<ReserveSeatsSummary> Handle(long projectionId, int row, int column)
         {
-            IProjection projection = projectionsRepo.GetById(projectionId);
-            IRoom room = roomsRepo.GetById(projection.RoomId);
+            IProjection projection = await projectionsRepo.GetById(projectionId);
+            IRoom room = await roomsRepo.GetById(projection.RoomId);
 
             if (row > room.Rows || row < 0)
             {
@@ -38,7 +39,7 @@ namespace CinemAPI.Domain.Tickets.ReserveSeats
                 return new ReserveSeatsSummary($"The room does not have a number {column} column.");
             }
 
-            return reserveSeats.Handle(projectionId, row, column);
+            return await reserveSeats.Handle(projectionId, row, column);
         }
     }
 }

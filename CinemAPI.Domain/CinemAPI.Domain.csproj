@@ -45,6 +45,7 @@
     <Compile Include="Constants\ReservationConstants.cs" />
     <Compile Include="Projections\GetAvailableSeatsCount\GetAvailableSeatsCountHandler.cs" />
     <Compile Include="Projections\GetAvailableSeatsCount\ProjectionValidation.cs" />
+    <Compile Include="Projections\NewProjection\NewProjectionAvailableSeatsValidation.cs" />
     <Compile Include="Projections\NewProjection\NewProjectionMovieValidation.cs" />
     <Compile Include="Projections\NewProjection\NewProjectionRoomValidation.cs" />
     <Compile Include="Projections\NewProjection\NewProjectionCreation.cs" />
