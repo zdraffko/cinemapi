@@ -11,5 +11,7 @@ namespace CinemAPI.Models.Input.Projection
         public DateTime StartDate { get; set; }
 
         public int AvailableSeatsCount { get; set; }
+
+        public bool IsReservable { get; set; }
     }
 }

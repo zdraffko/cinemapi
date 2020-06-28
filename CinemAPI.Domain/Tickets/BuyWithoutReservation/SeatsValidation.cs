@@ -1,4 +1,5 @@
 ﻿using CinemAPI.Data;
+using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Projection;
@@ -13,17 +14,20 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
         private readonly ITicketRepository ticketsRepo;
         private readonly IProjectionRepository projectionsRepo;
         private readonly IRoomRepository roomsRepo;
+        private readonly ICancelExpiredReservations cancelExpiredReservations;
 
         public SeatsValidation(
             IBuyWithoutReservation buyWithoutReservation,
             ITicketRepository ticketsRepo,
             IProjectionRepository projectionsRepo,
-            IRoomRepository roomsRepo)
+            IRoomRepository roomsRepo,
+            ICancelExpiredReservations cancelExpiredReservations)
         {
             this.buyWithoutReservation = buyWithoutReservation;
             this.ticketsRepo = ticketsRepo;
             this.projectionsRepo = projectionsRepo;
             this.roomsRepo = roomsRepo;
+            this.cancelExpiredReservations = cancelExpiredReservations;
         }
 
         public BuyWithoutReservationSummary Handle(long projectionId, int row, int column)
@@ -41,6 +45,8 @@ namespace CinemAPI.Domain.Tickets.BuyWithoutReservation
             {
                 return new BuyWithoutReservationSummary($"The room does not have a number {column} column.");
             }
+
+            cancelExpiredReservations.Cancel(projectionId);
 
             if (ticket != null && ticket.IsBought)
             {

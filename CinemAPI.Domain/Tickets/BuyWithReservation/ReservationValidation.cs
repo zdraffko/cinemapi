@@ -1,5 +1,6 @@
 ﻿using System;
 using CinemAPI.Data;
+using CinemAPI.Domain.Contracts.Contracts.Common;
 using CinemAPI.Domain.Contracts.Contracts.TicketContracts;
 using CinemAPI.Domain.Contracts.Models.TicketModels;
 using CinemAPI.Models.Contracts.Projection;
@@ -12,15 +13,18 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
         private readonly IBuyWithReservation buyWithReservation;
         private readonly ITicketRepository ticketsRepo;
         private readonly IProjectionRepository projectionsRepo;
+        private readonly ICancelExpiredReservations cancelExpiredReservations;
 
         public ReservationValidation(
             IBuyWithReservation buyWithReservation,
             ITicketRepository ticketsRepo,
-            IProjectionRepository projectionsRepo)
+            IProjectionRepository projectionsRepo,
+            ICancelExpiredReservations cancelExpiredReservations)
         {
             this.buyWithReservation = buyWithReservation;
             this.ticketsRepo = ticketsRepo;
             this.projectionsRepo = projectionsRepo;
+            this.cancelExpiredReservations = cancelExpiredReservations;
         }
 
         public BuyWithReservationSummary Handle(long ticketId)
@@ -32,6 +36,7 @@ namespace CinemAPI.Domain.Tickets.BuyWithReservation
                 return new BuyWithReservationSummary($"A reservation with Id {ticketId} does not exist.");
             }
 
+            cancelExpiredReservations.Cancel(ticket.ProjectionId);
             IProjection projection = projectionsRepo.GetById(ticket.ProjectionId);
 
             if (projection.StartDate - TimeSpan.FromMinutes(10) <= DateTime.UtcNow)

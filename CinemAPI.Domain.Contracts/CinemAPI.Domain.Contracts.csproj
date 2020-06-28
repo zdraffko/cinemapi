@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Common\ICancelExpiredReservations.cs" />
     <Compile Include="Contracts\ProjectionContracts\IGetAvailableSeatsCount.cs" />
     <Compile Include="Contracts\ProjectionContracts\INewProjection.cs" />
     <Compile Include="Contracts\TicketContracts\IBuyWithoutReservation.cs" />

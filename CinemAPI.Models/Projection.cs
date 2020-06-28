@@ -11,13 +11,14 @@ namespace CinemAPI.Models
             this.Tickets = new List<Ticket>();
         }
 
-        public Projection(int movieId, int roomId, DateTime startDate, int availableSeatsCount)
+        public Projection(int movieId, int roomId, DateTime startDate, int availableSeatsCount, bool isReservable)
             : this()
         {
             this.MovieId = movieId;
             this.RoomId = roomId;
             this.StartDate = startDate;
             this.AvailableSeatsCount = availableSeatsCount;
+            this.IsReservable = isReservable;
         }
 
         public long Id { get; set; }
@@ -33,6 +34,8 @@ namespace CinemAPI.Models
         public DateTime StartDate { get; set; }
 
         public int AvailableSeatsCount { get; set; }
+
+        public bool IsReservable { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

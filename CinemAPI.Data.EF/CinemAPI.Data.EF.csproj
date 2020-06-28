@@ -66,6 +66,10 @@
     <Compile Include="Migrations\202006271359036_AddRelationshipBetweenProjectionsAndTickets.Designer.cs">
       <DependentUpon>202006271359036_AddRelationshipBetweenProjectionsAndTickets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006280816234_AddIsReservableToProjectionsTable.cs" />
+    <Compile Include="Migrations\202006280816234_AddIsReservableToProjectionsTable.Designer.cs">
+      <DependentUpon>202006280816234_AddIsReservableToProjectionsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="IModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006271359036_AddRelationshipBetweenProjectionsAndTickets.resx">
       <DependentUpon>202006271359036_AddRelationshipBetweenProjectionsAndTickets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006280816234_AddIsReservableToProjectionsTable.resx">
+      <DependentUpon>202006280816234_AddIsReservableToProjectionsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

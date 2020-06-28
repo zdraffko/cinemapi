@@ -26,7 +26,8 @@ namespace CinemAPI.Domain.Projections.NewProjection
                 projection.MovieId,
                 projection.RoomId,
                 projection.StartDate,
-                projection.AvailableSeatsCount));
+                projection.AvailableSeatsCount,
+                projection.IsReservable));
 
             return new NewProjectionSummary(true);
         }

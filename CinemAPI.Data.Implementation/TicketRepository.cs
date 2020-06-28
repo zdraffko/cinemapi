@@ -54,11 +54,11 @@ namespace CinemAPI.Data.Implementation
                     true,
                     false)
                 );
-
-                return;
             }
-
-            ticket.IsReserved = true;
+            else
+            {
+                ticket.IsReserved = true;
+            }
 
             db.SaveChanges();
         }
@@ -76,11 +76,11 @@ namespace CinemAPI.Data.Implementation
                     false,
                     true)
                 );
-
-                return;
             }
-
-            ticket.IsBought = true;
+            else
+            {
+                ticket.IsBought = true;
+            }
 
             db.SaveChanges();
         }

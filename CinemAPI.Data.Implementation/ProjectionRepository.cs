@@ -38,7 +38,7 @@ namespace CinemAPI.Data.Implementation
 
         public void Insert(IProjectionCreation proj)
         {
-            Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate, proj.AvailableSeatsCount);
+            Projection newProj = new Projection(proj.MovieId, proj.RoomId, proj.StartDate, proj.AvailableSeatsCount, proj.IsReservable);
 
             db.Projections.Add(newProj);
             db.SaveChanges();
@@ -68,6 +68,20 @@ namespace CinemAPI.Data.Implementation
             }
 
             projection.AvailableSeatsCount += seatsCount;
+
+            db.SaveChanges();
+        }
+
+        public void ChangeReservationPolicy(long projectionId, bool isReservable)
+        {
+            Projection projection = this.GetById(projectionId) as Projection;
+
+            if (projection == null)
+            {
+                return;
+            }
+
+            projection.IsReservable = isReservable;
 
             db.SaveChanges();
         }

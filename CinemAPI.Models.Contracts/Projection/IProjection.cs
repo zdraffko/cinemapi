@@ -13,5 +13,7 @@ namespace CinemAPI.Models.Contracts.Projection
         DateTime StartDate { get; }
 
         int AvailableSeatsCount { get; }
+
+        bool IsReservable { get; }
     }
 }

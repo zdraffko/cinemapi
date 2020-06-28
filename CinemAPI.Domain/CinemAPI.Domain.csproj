@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CancelExpiredReservations.cs" />
     <Compile Include="Projections\GetAvailableSeatsCount\GetAvailableSeatsCountHandler.cs" />
     <Compile Include="Projections\GetAvailableSeatsCount\ProjectionValidation.cs" />
     <Compile Include="Projections\NewProjection\NewProjectionMovieValidation.cs" />

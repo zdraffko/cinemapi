@@ -14,6 +14,7 @@ namespace CinemAPI.Data.EF.ModelConfigurations
             projectionModel.Property(model => model.RoomId).IsRequired();
             projectionModel.Property(model => model.StartDate).IsRequired();
             projectionModel.Property(model => model.AvailableSeatsCount).IsRequired();
+            projectionModel.Property(model => model.IsReservable).IsRequired();
         }
     }
 }

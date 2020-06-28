@@ -24,7 +24,8 @@ namespace CinemAPI.Controllers
                 model.MovieId,
                 model.RoomId,
                 model.StartDate,
-                model.AvailableSeatsCount));
+                model.AvailableSeatsCount,
+                model.IsReservable));
 
             if (summary.IsCreated)
             {
